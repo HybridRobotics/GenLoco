@@ -2,7 +2,9 @@
 
 Official codebase for [GenLoco: Generalized Locomotion Controllers for Quadrupedal Robots](http://arxiv.org/abs/2209.05309), containing code for training on randomized robotic morphologies to imitate reference motions as well as pre-trained policies and code to deploy these on simulated or real-world robots.
 
-![genloco transfer](https://github.com/HybridRobotics/GenLoco/blob/main/motion_imitation/data/genloco.gif)
+<p align="center">
+<img src="https://github.com/HybridRobotics/GenLoco/blob/main/motion_imitation/data/genloco.gif" width="80%" height="80%"/>
+</p>
 
 We demonstrate zero-shot transfer for locomotion control of the pacing and spinning gaits for the following 10 robots, using one single policy for each motion ([video](https://youtu.be/5QUs32MjNu4)). However, you can also test the GenLoco models on your own robots (see the `Adding New Robots` section)!
 - A1
@@ -86,6 +88,12 @@ Then, run the following code to test deployment:
 ```bash
 python3 motion_imitation/run.py --mode test --model_file motion_imitation/data/policies/morphology_generator_pace_model.zip --robot ${your_new_robot} --phase_only --visualize
 ```
+## An Exploration on a Different Morphological Structure
+We also explore randomizing the joint direction. This model can be be found at `motion_imitation/data/policies/morphology_generator_inverse.zip`
+
+<p align="center">
+<img src="https://github.com/HybridRobotics/GenLoco/blob/main/motion_imitation/data/inversed.gif" width="30%" height="30%"/>
+</p>
 
 ## Deploying the GenLoco policy on Real Robots
 We demonstrate how to use our codebase for deployment of the GenLoco policy on real robots. The following instructions show how to deploy on the real A1.
