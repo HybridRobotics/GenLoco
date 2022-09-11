@@ -1,10 +1,10 @@
 # GenLoco: Generalized Locomotion Controllers for Quadrupedal Robots
 
-Official codebase for `GenLoco: Generalized Locomotion Controllers for Quadrupedal Robots` containing code for training on randomized robotic morphologies to imitate reference motions, as well as pre-trained policies and code to deploy these on simulated or real-world robots.
+Official codebase for [GenLoco: Generalized Locomotion Controllers for Quadrupedal Robots](http://arxiv.org/abs/2209.05309), containing code for training on randomized robotic morphologies to imitate reference motions as well as pre-trained policies and code to deploy these on simulated or real-world robots.
 
-![genloco transfer](https://github.com/BoboBananas/Quadruped-Motion-Imitation/blob/paper_version_added/motion_imitation/data/genloco.gif)
+![genloco transfer](https://github.com/HybridRobotics/GenLoco/blob/main/motion_imitation/data/genloco.gif)
 
-We support zero-shot locomotion of the pacing and spinning gaits for the following 10 robots, using one single policy for each motion.
+We demonstrate zero-shot transfer for locomotion control of the pacing and spinning gaits for the following 10 robots, using one single policy for each motion ([video](https://youtu.be/5QUs32MjNu4)). However, you can also test the GenLoco models on your own robots (see the `Adding New Robots` section)!
 - A1
 - Go1
 - Laikago
