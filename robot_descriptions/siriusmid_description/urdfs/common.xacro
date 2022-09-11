@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <!-- PROPERTY LIST -->
+    <!--All units in m-kg-s-radians unit system -->
+    <xacro:property name="PI" value="3.1415926535897931" />
+
+    <!-- Main body length, width, height and mass -->
+    <xacro:property name="base_link_mass"        value="5.283" />
+    <xacro:property name="base_link_width" value="0.22"/>
+    <xacro:property name="base_link_length" value="0.54"/>
+
+    <!-- LF LEG length and Mass -->
+    <!-- lf abad link and mass -->
+    <xacro:property name="lf_abad_link_length"               value="0.095" />
+    <xacro:property name="lf_abad_link_mass"                 value="0.92607" />
+    <xacro:property name="lf_abad_joint_origin_x"            value="0.216" />
+    <xacro:property name="lf_abad_joint_origin_y"            value="0.055" />
+    <xacro:property name="lf_abad_joint_origin_z"            value="0" />
+    <xacro:property name="lf_abad_joint_rpy_r"               value="1.5708" />
+    <xacro:property name="lf_abad_joint_rpy_p"               value="0" />
+    <xacro:property name="lf_abad_joint_rpy_y"               value="1.5708" />
+
+    <!-- lf hip link and mass -->
+    <xacro:property name="lf_hip_link_length"               value="0.27" />
+    <xacro:property name="lf_hip_link_mass"                 value="1.2204" />
+    <xacro:property name="lf_hip_joint_rpy_r"               value="1.5708" />
+    <xacro:property name="lf_hip_joint_rpy_p"               value="0" />
+    <xacro:property name="lf_hip_joint_rpy_y"               value="-1.5708" />
+    <!-- lf knee link and mass -->
+    <xacro:property name="lf_knee_link_length"              value="0.27" />
+    <xacro:property name="lf_knee_link_mass"                value="0.19509" />
+
+
+    <!-- LR LEG length and Mass -->
+    <!-- lr abad link and mass -->
+    <xacro:property name="lr_abad_link_length"               value="0.095" />
+    <xacro:property name="lr_abad_link_mass"                 value="0.92607" />
+    <xacro:property name="lr_abad_joint_origin_x"            value="-0.216" />
+    <xacro:property name="lr_abad_joint_origin_y"            value="0.055" />
+    <xacro:property name="lr_abad_joint_origin_z"            value="0" />
+    <xacro:property name="lr_abad_joint_rpy_r"               value="-1.5708" />
+    <xacro:property name="lr_abad_joint_rpy_p"               value="0" />
+    <xacro:property name="lr_abad_joint_rpy_y"               value="1.5708" />
+
+    <!-- lr hip link and mass -->
+    <xacro:property name="lr_hip_link_length"               value="0.27" />
+    <xacro:property name="lr_hip_link_mass"                 value="1.2204" />
+    <xacro:property name="lr_hip_joint_rpy_r"               value="-1.5708" />
+    <xacro:property name="lr_hip_joint_rpy_p"               value="0" />
+    <xacro:property name="lr_hip_joint_rpy_y"               value="1.5708" />
+
+    <!-- lr knee link and mass -->
+    <xacro:property name="lr_knee_link_length"              value="0.27" />
+    <xacro:property name="lr_knee_link_mass"                value="0.19509" />
+    <!-- RF LEG length and Mass -->
+    <!-- rf abad link and mass -->
+    <xacro:property name="rf_abad_link_length"               value="0.095" />
+    <xacro:property name="rf_abad_link_mass"                 value="0.92607" />
+    <xacro:property name="rf_abad_joint_origin_x"            value="0.216" />
+    <xacro:property name="rf_abad_joint_origin_y"            value="-0.055" />
+    <xacro:property name="rf_abad_joint_origin_z"            value="0" />
+    <xacro:property name="rf_abad_joint_rpy_r"               value="-1.5708" />
+    <xacro:property name="rf_abad_joint_rpy_p"               value="0" />
+    <xacro:property name="rf_abad_joint_rpy_y"               value="-1.5708" />
+
+    <!-- rf hip link and mass -->
+    <xacro:property name="rf_hip_link_length"               value="0.27" />
+    <xacro:property name="rf_hip_link_mass"                 value="1.2204" />
+    <xacro:property name="rf_hip_joint_rpy_r"               value="1.5708" />
+    <xacro:property name="rf_hip_joint_rpy_p"               value="0" />
+    <xacro:property name="rf_hip_joint_rpy_y"               value="1.5708" />
+    <!-- rf knee link and mass -->
+    <xacro:property name="rf_knee_link_length"              value="0.27" />
+    <xacro:property name="rf_knee_link_mass"                value="0.19509" />
+    <!-- RR LEG length and Mass -->
+    <!-- rr abad link and mass -->
+    <xacro:property name="rr_abad_link_length"              value="0.095" />
+    <xacro:property name="rr_abad_link_mass"                value="0.92607" />
+    <xacro:property name="rr_abad_joint_origin_x"            value="-0.216" />
+    <xacro:property name="rr_abad_joint_origin_y"            value="-0.055" />
+    <xacro:property name="rr_abad_joint_origin_z"            value="0" />
+    <xacro:property name="rr_abad_joint_rpy_r"               value="1.5708" />
+    <xacro:property name="rr_abad_joint_rpy_p"               value="0" />
+    <xacro:property name="rr_abad_joint_rpy_y"               value="-1.5708" />
+
+    <!-- rr hip link and mass -->
+    <xacro:property name="rr_hip_link_length"               value="0.27" />
+    <xacro:property name="rr_hip_link_mass"                 value="1.2204" />
+    <xacro:property name="rr_hip_joint_rpy_r"               value="-1.5708" />
+    <xacro:property name="rr_hip_joint_rpy_p"               value="0" />
+    <xacro:property name="rr_hip_joint_rpy_y"               value="-1.5708" />
+
+    <!-- rr knee link and mass -->
+    <xacro:property name="rr_knee_link_length"              value="0.27" />
+    <xacro:property name="rr_knee_link_mass"                value="0.19509" />
+
+    <!-- arm link 1 position-->
+
+    <xacro:property name="inertial_xyz_1" value="-4.54332707405351E-05 0.0330281553136483 1.94028629631332E-05"/>
+    <xacro:property name="inertial_rpy_1" value="0 0 0"/>
+    <xacro:property name="joint_xyz_1" value="0.18 0 0.09"/>
+    <xacro:property name="joint_rpy_1" value="1.5708 0 0"/>
+    <xacro:property name="mass_1" value="0.235406473601654"/>
+    <xacro:property name="joint_axis_1" value="0 -1 0"/>
+    <xacro:property name="ixx_1" value="0.000160607012565252"/>
+    <xacro:property name="iyy_1" value="0.000211026969733757"/>
+    <xacro:property name="izz_1" value="0.00024235784367254"/>
+    <xacro:property name="ixy_1" value="2.19448094706555E-07"/>
+    <xacro:property name="ixz_1" value="-1.11059955432991E-07"/>
+    <xacro:property name="iyz_1" value="1.28505266234176E-09"/>
+    <xacro:property name="effort_1" value="15"/>
+        <!-- arm link 2 position-->
+
+    <xacro:property name="inertial_xyz_2" value="-0.123983448034847 -0.000167759427026362 -0.0161075281625212"/>
+    <xacro:property name="inertial_rpy_2" value="0 0 0"/>
+    <xacro:property name="joint_xyz_2" value="0 0.0598 0.0161"/>
+    <xacro:property name="joint_rpy_2" value="0 0 0"/>
+    <xacro:property name="mass_2" value="0.2050657060621"/>
+    <xacro:property name="joint_axis_2" value="0 0 1"/>
+    <xacro:property name="ixx_2" value="5.99414289179861E-05"/>
+    <xacro:property name="iyy_2" value="0.000518464036627089"/>
+    <xacro:property name="izz_2" value="0.000555420060716328"/>
+    <xacro:property name="ixy_2" value="-1.30659504989751E-08"/>
+    <xacro:property name="ixz_2" value="-2.32968333714228E-07"/>
+    <xacro:property name="iyz_2" value="-1.46723013267941E-12"/>
+    <xacro:property name="effort_2" value="15"/>
+        <!-- arm link 3 position-->
+
+    <xacro:property name="inertial_xyz_3" value="0.0795921032840744 0.0544863432904803 0.0150269748129291"/>
+    <xacro:property name="inertial_rpy_3" value="0 0 0"/>
+    <xacro:property name="joint_xyz_3" value="-0.2995 5E-05 -0.0311"/>
+    <xacro:property name="joint_rpy_3" value="0 0 0"/>
+    <xacro:property name="mass_3" value="0.108769772326711"/>
+    <xacro:property name="joint_axis_3" value="0 0 -1"/>
+    <xacro:property name="ixx_3" value="9.3367242976894E-05"/>
+    <xacro:property name="iyy_3" value="0.000600921630137833"/>
+    <xacro:property name="izz_3" value="0.000628605946082781"/>
+    <xacro:property name="ixy_3" value="8.5827927234517E-06"/>
+    <xacro:property name="ixz_3" value="-2.86170084482089E-08"/>
+    <xacro:property name="iyz_3" value="3.36973255145296E-08"/>
+    <xacro:property name="effort_3" value="15"/>
+        <!-- arm link 4 position-->
+
+    <xacro:property name="inertial_xyz_4" value="0.0165266443814739 -0.00174069771255481 1.11979181560279E-05"/>
+    <xacro:property name="inertial_rpy_4" value="0 0 0"/>
+    <xacro:property name="joint_xyz_4" value="0.271235 0.0635 0.015"/>
+    <xacro:property name="joint_rpy_4" value="0 0 0"/>
+    <xacro:property name="mass_4" value="0.0444792966223345"/>
+    <xacro:property name="joint_axis_4" value="1 0 0"/>
+    <xacro:property name="ixx_4" value="2.43072028955947E-05"/>
+    <xacro:property name="iyy_4" value="3.17415145224588E-05"/>
+    <xacro:property name="izz_4" value="2.76599362226638E-05"/>
+    <xacro:property name="ixy_4" value="1.19532694040292E-06"/>
+    <xacro:property name="ixz_4" value="2.29104878877617E-11"/>
+    <xacro:property name="iyz_4" value="6.14642634616325E-11"/>
+    <xacro:property name="effort_4" value="3"/>
+        <!-- arm link 5 position-->
+
+    <xacro:property name="inertial_xyz_5" value="0.0176033091473792 -0.0362914142509103 -0.000193904292373495"/>
+    <xacro:property name="inertial_rpy_5" value="0 0 0"/>
+    <xacro:property name="joint_xyz_5" value="0.0315 0.0349 0"/>
+    <xacro:property name="joint_rpy_5" value="0 0 0"/>
+    <xacro:property name="mass_5" value="0.060436314636669"/>
+    <xacro:property name="joint_axis_5" value="0 -1 0"/>
+    <xacro:property name="ixx_5" value="4.02686986024085E-05"/>
+    <xacro:property name="iyy_5" value="2.67276541678908E-05"/>
+    <xacro:property name="izz_5" value="4.15933303332631E-05"/>
+    <xacro:property name="ixy_5" value="-3.66834880836016E-06"/>
+    <xacro:property name="ixz_5" value="-5.01729129104047E-09"/>
+    <xacro:property name="iyz_5" value="2.5992331923845E-08"/>
+    <xacro:property name="effort_5" value="3"/>
+        <!-- arm link 6 position-->
+
+    <xacro:property name="inertial_xyz_6" value="0.0088328 -4.7916E-07 -4.2793E-05"/>
+    <xacro:property name="inertial_rpy_6" value="0 0 0"/>
+    <xacro:property name="joint_xyz_6" value="0.04775 -0.03445 0"/>
+    <xacro:property name="joint_rpy_6" value="0 0 0"/>
+    <xacro:property name="mass_6" value="0.043795"/>
+    <xacro:property name="joint_axis_6" value="1 0 0"/>
+    <xacro:property name="ixx_6" value="1.3843E-05"/>
+    <xacro:property name="iyy_6" value="9.2024E-06"/>
+    <xacro:property name="izz_6" value="9.2215E-06"/>
+    <xacro:property name="ixy_6" value="-2.1512E-10"/>
+    <xacro:property name="ixz_6" value="-2.2404E-08"/>
+    <xacro:property name="iyz_6" value="-2.8088E-10"/>
+    <xacro:property name="effort_6" value="3"/>
+<!--    Arm color-->
+    <xacro:property name="joint1_col" value="Black"/>
+    <xacro:property name="joint2_col" value="White"/>
+    <xacro:property name="joint3_col" value="White"/>
+    <xacro:property name="joint4_col" value="Black"/>
+    <xacro:property name="joint5_col" value="Black"/>
+    <xacro:property name="joint6_col" value="Red"/>
+<!--    arm joint limit joint1_low joint1_up -->
+    <xacro:property name="joint1_low" value="-3.14"/>
+    <xacro:property name="joint1_up" value="3.14"/>
+    <xacro:property name="joint2_low" value="-3.14"/>
+    <xacro:property name="joint2_up" value="0.14"/>
+    <xacro:property name="joint3_low" value="-3.14"/>
+    <xacro:property name="joint3_up" value="0."/>
+    <xacro:property name="joint4_low" value="-3.14"/>
+    <xacro:property name="joint4_up" value="3.14"/>
+    <xacro:property name="joint5_low" value="-3.14"/>
+    <xacro:property name="joint5_up" value="3.14"/>
+    <xacro:property name="joint6_low" value="-3.14"/>
+    <xacro:property name="joint6_up" value="3.14"/>
+</robot>

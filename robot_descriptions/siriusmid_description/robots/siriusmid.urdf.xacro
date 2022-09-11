@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+
+<robot name="siriusmid" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:property name="with_arm" default="false"/>
+	<xacro:arg name="task_period" default="0.004"/>
+	<xacro:arg name="new_gazebo_version" default="false"/>
+
+	<!-- This argument allows us to load joint sensors that measure the internal wrenches -->
+	<xacro:arg name="load_force_sensors" default="false"/>
+
+	<!-- The following included files set up definitions of parts of the robot body -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/common.xacro"/>
+
+	
+	<!-- Sirius-mid Body -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/body/body.urdf.xacro"/>
+
+	<!-- Sirius-mid legs -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/leg/leg.urdf.xacro"/>
+	<!-- Sirius-arm arm -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/arm/arm.urdf.xacro"/>
+	
+	<!-- generic simulator_gazebo plugins for starting mechanism control, ros time -->
+        <xacro:include filename="$(find siriusmid_description)/gazebo/gazebo.urdf.xacro">
+             <xacro:arg name="task_period" value="$(arg task_period)"/>
+        </xacro:include>
+
+	<!-- Now we can start using the macros included above to define the actual Siriusmid -->
+
+	<!--sirius body -->
+        <xacro:sirius_body new_gazebo_version="$(arg new_gazebo_version)" />
+	<!-- LF leg -->
+	<xacro:siriusmid_leg
+		name="lf"
+		parent="body_link"
+		abad_o_x="${lf_abad_joint_origin_x}"
+		abad_o_y="${lf_abad_joint_origin_y}"
+		abad_o_z="${lf_abad_joint_origin_z}"
+		abad_rpy_r="${lf_abad_joint_rpy_r}"
+		abad_rpy_p="${lf_abad_joint_rpy_p}"
+		abad_rpy_y="${lf_abad_joint_rpy_y}"
+		hip_rpy_r="${lf_hip_joint_rpy_r}"
+		hip_rpy_p="${lf_hip_joint_rpy_p}"
+		hip_rpy_y="${lf_hip_joint_rpy_y}"
+		load_force_sensors="$(arg load_force_sensors)">
+	</xacro:siriusmid_leg>
+
+	<!-- RF leg -->
+	<xacro:siriusmid_leg
+		name="rf"
+		parent="body_link"
+		abad_o_x="${rf_abad_joint_origin_x}"
+		abad_o_y="${rf_abad_joint_origin_y}"
+		abad_o_z="${rf_abad_joint_origin_z}"
+		abad_rpy_r="${rf_abad_joint_rpy_r}"
+		abad_rpy_p="${rf_abad_joint_rpy_p}"
+		abad_rpy_y="${rf_abad_joint_rpy_y}"
+		hip_rpy_r="${rf_hip_joint_rpy_r}"
+		hip_rpy_p="${rf_hip_joint_rpy_p}"
+		hip_rpy_y="${rf_hip_joint_rpy_y}"
+		load_force_sensors="$(arg load_force_sensors)">
+	</xacro:siriusmid_leg>
+
+	<!-- LR leg -->
+	<xacro:siriusmid_leg
+		name="lr"
+		parent="body_link"
+		abad_o_x="${lr_abad_joint_origin_x}"
+		abad_o_y="${lr_abad_joint_origin_y}"
+		abad_o_z="${lr_abad_joint_origin_z}"
+		abad_rpy_r="${lr_abad_joint_rpy_r}"
+		abad_rpy_p="${lr_abad_joint_rpy_p}"
+		abad_rpy_y="${lr_abad_joint_rpy_y}"
+		hip_rpy_r="${lr_hip_joint_rpy_r}"
+		hip_rpy_p="${lr_hip_joint_rpy_p}"
+		hip_rpy_y="${lr_hip_joint_rpy_y}"
+		load_force_sensors="$(arg load_force_sensors)">
+	</xacro:siriusmid_leg>
+
+	<!-- RR leg -->
+	<xacro:siriusmid_leg
+		name="rr"
+		parent="body_link"
+		abad_o_x="${rr_abad_joint_origin_x}"
+		abad_o_y="${rr_abad_joint_origin_y}"
+		abad_o_z="${rr_abad_joint_origin_z}"
+		abad_rpy_r="${rr_abad_joint_rpy_r}"
+		abad_rpy_p="${rr_abad_joint_rpy_p}"
+		abad_rpy_y="${rr_abad_joint_rpy_y}"
+		hip_rpy_r="${rr_hip_joint_rpy_r}"
+		hip_rpy_p="${rr_hip_joint_rpy_p}"
+		hip_rpy_y="${rr_hip_joint_rpy_y}"
+		load_force_sensors="$(arg load_force_sensors)">
+	</xacro:siriusmid_leg>
+
+	<!--Arm-->
+	<xacro:if value="${with_arm}">
+		<!--		link1-->
+		<xacro:sirius_arm
+				num_name="1"
+				parent="body_link"
+				inertial_xyz="${inertial_xyz_1}"
+				inertial_rpy="${inertial_rpy_1}"
+				joint_xyz="${joint_xyz_1}"
+				joint_rpy="${joint_rpy_1}"
+				mass="${mass_1}"
+				joint_axis="${joint_axis_1}"
+				ixx="${ixx_1}"
+				iyy="${iyy_1}"
+				izz="${izz_1}"
+				ixy="${ixy_1}"
+				ixz="${ixz_1}"
+				iyz="${iyz_1}"
+				effort="${effort_1}"
+				color_name="${joint1_col}"
+				low_lit="${joint1_low}"
+				up_lit="${joint1_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+				<!--		link2-->
+		<xacro:sirius_arm
+				num_name="2"
+				parent="sirius_arm_link_1"
+				inertial_xyz="${inertial_xyz_2}"
+				inertial_rpy="${inertial_rpy_2}"
+				joint_xyz="${joint_xyz_2}"
+				joint_rpy="${joint_rpy_2}"
+				mass="${mass_2}"
+				joint_axis="${joint_axis_2}"
+				ixx="${ixx_2}"
+				iyy="${iyy_2}"
+				izz="${izz_2}"
+				ixy="${ixy_2}"
+				ixz="${ixz_2}"
+				iyz="${iyz_2}"
+				effort="${effort_2}"
+				color_name="${joint2_col}"
+				low_lit="${joint2_low}"
+				up_lit="${joint2_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+				<!--		link1-->
+		<xacro:sirius_arm
+				num_name="3"
+				parent="sirius_arm_link_2"
+				inertial_xyz="${inertial_xyz_3}"
+				inertial_rpy="${inertial_rpy_3}"
+				joint_xyz="${joint_xyz_3}"
+				joint_rpy="${joint_rpy_3}"
+				mass="${mass_3}"
+				joint_axis="${joint_axis_3}"
+				ixx="${ixx_3}"
+				iyy="${iyy_3}"
+				izz="${izz_3}"
+				ixy="${ixy_3}"
+				ixz="${ixz_3}"
+				iyz="${iyz_3}"
+				effort="${effort_3}"
+				color_name="${joint3_col}"
+				low_lit="${joint3_low}"
+				up_lit="${joint3_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+				<!--		link4-->
+		<xacro:sirius_arm
+				num_name="4"
+				parent="sirius_arm_link_3"
+				inertial_xyz="${inertial_xyz_4}"
+				inertial_rpy="${inertial_rpy_4}"
+				joint_xyz="${joint_xyz_4}"
+				joint_rpy="${joint_rpy_4}"
+				mass="${mass_4}"
+				joint_axis="${joint_axis_4}"
+				ixx="${ixx_4}"
+				iyy="${iyy_4}"
+				izz="${izz_4}"
+				ixy="${ixy_4}"
+				ixz="${ixz_4}"
+				iyz="${iyz_4}"
+				effort="${effort_4}"
+				color_name="${joint4_col}"
+				low_lit="${joint4_low}"
+				up_lit="${joint4_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+				<!--		link5-->
+		<xacro:sirius_arm
+				num_name="5"
+				parent="sirius_arm_link_4"
+				inertial_xyz="${inertial_xyz_5}"
+				inertial_rpy="${inertial_rpy_5}"
+				joint_xyz="${joint_xyz_5}"
+				joint_rpy="${joint_rpy_5}"
+				mass="${mass_5}"
+				joint_axis="${joint_axis_5}"
+				ixx="${ixx_5}"
+				iyy="${iyy_5}"
+				izz="${izz_5}"
+				ixy="${ixy_5}"
+				ixz="${ixz_5}"
+				iyz="${iyz_5}"
+				effort="${effort_5}"
+				color_name="${joint5_col}"
+				low_lit="${joint5_low}"
+				up_lit="${joint5_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+				<!--		link6-->
+		<xacro:sirius_arm
+				num_name="6"
+				parent="sirius_arm_link_5"
+				inertial_xyz="${inertial_xyz_6}"
+				inertial_rpy="${inertial_rpy_6}"
+				joint_xyz="${joint_xyz_6}"
+				joint_rpy="${joint_rpy_6}"
+				mass="${mass_6}"
+				joint_axis="${joint_axis_6}"
+				ixx="${ixx_6}"
+				iyy="${iyy_6}"
+				izz="${izz_6}"
+				ixy="${ixy_6}"
+				ixz="${ixz_6}"
+				iyz="${iyz_6}"
+				effort="${effort_6}"
+				color_name="${joint6_col}"
+				low_lit="${joint6_low}"
+				up_lit="${joint6_up}"
+				load_force_sensors="$(arg load_force_sensors)">
+		</xacro:sirius_arm>
+	</xacro:if>
+</robot>
+

@@ -1,0 +1,14 @@
+rl_control_config:
+    robot_name: "a1"        
+    control_frequency: 1000
+    obs_send_frequency: 1000
+    Kp: [100,100,100]
+    Kd: [1,2,2]
+    udp_receive_frequency: 2000
+    recv_IP: "192.168.123.12"
+    send_IP: "192.168.123.182" 
+    recv_port: 6007              
+    send_port: 6006
+    init_pos: [0.0, 0.9, -1.8, 0.0, 0.9, -1.8, 0.0, 0.9, -1.8, 0.0, 0.9, -1.8]
+    joint_upper_bound: [0.802851455917,4.18879020479,-0.916297857297]
+    joint_lower_bound: [-0.802851455917,-1.0471975512,-2.69653369433]

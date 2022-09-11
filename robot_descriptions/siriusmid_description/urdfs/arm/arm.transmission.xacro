@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+        <xacro:macro name="siriusarm_transmission" params="num_name">
+                <transmission name="sirius_arm_joint_${num_name}_trans">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="sirius_arm_joint_${num_name}">
+                                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="sirius_arm_joint_${num_name}_motor">
+                                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                                <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        </xacro:macro>
+
+</robot>

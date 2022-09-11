@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="siriusmid_belt_description">
+  <link
+    name="body_link">
+    <inertial>
+      <origin
+        xyz="1.87559379909119E-17 -4.34397560491855E-18 -0.00068561787443388"
+        rpy="0 0 0" />
+      <mass
+        value="10.3298529395913" />
+      <inertia
+        ixx="0.0431054681860875"
+        ixy="9.2877162666434E-18"
+        ixz="-3.85431142075972E-19"
+        iyy="0.192406723092444"
+        iyz="1.5156751555308E-18"
+        izz="0.216111754062656" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/body_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/body_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="rf_abad_link">
+    <inertial>
+      <origin
+        xyz="0.0258192165959408 -7.26236163138781E-08 0.0524275468313256"
+        rpy="0 0 0" />
+      <mass
+        value="1.97468818481228" />
+      <inertia
+        ixx="0.00224471294806031"
+        ixy="9.22913376753817E-09"
+        ixz="-0.000156350222521567"
+        iyy="0.0032012780882216"
+        iyz="1.70689440514772E-11"
+        izz="0.0030773621949221" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_abad_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_abad_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_abad_joint"
+    type="revolute">
+    <origin
+      xyz="0.241 -0.055 0"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="body_link" />
+    <child
+      link="rf_abad_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="rf_hip_link">
+    <inertial>
+      <origin
+        xyz="0.116650617270062 -4.72680310503737E-06 0.00350289524078171"
+        rpy="0 0 0" />
+      <mass
+        value="1.04888992713168" />
+      <inertia
+        ixx="0.000606304950867143"
+        ixy="-4.37435372446955E-07"
+        ixz="4.39293428916562E-05"
+        iyy="0.0123505150681065"
+        iyz="-1.23652493672397E-08"
+        izz="0.0125461327293142" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_hip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_hip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.10045 0 0.055499"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="rf_abad_link" />
+    <child
+      link="rf_hip_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+
+  </joint>
+  <link
+    name="rf_knee_link">
+    <inertial>
+      <origin
+        xyz="0.063196 -0.011258 3.135E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.39106" />
+      <inertia
+        ixx="0.00023075"
+        ixy="-0.00012831"
+        ixz="6.1437E-09"
+        iyy="0.0036579"
+        iyz="1.8114E-09"
+        izz="0.003834" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_knee_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.65882 0.61961 0.56078 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rf_knee_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.2695 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="rf_hip_link" />
+    <child
+      link="rf_knee_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+    <!-- Foot link -->
+  <link name="rf_foot_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0." ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+    <joint name="rf_foot_joint" type="fixed">
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.271 0 0"/>
+    <parent link="rf_knee_link"/>
+    <child link="rf_foot_link"/>
+  </joint>
+  <link
+    name="lf_abad_link">
+    <inertial>
+      <origin
+        xyz="0.0258192165959408 -7.26181183425299E-08 0.0524275468313256"
+        rpy="0 0 0" />
+      <mass
+        value="1.97468818481228" />
+      <inertia
+        ixx="0.00224471294806031"
+        ixy="9.22911737131753E-09"
+        ixz="-0.000156350222521568"
+        iyy="0.0032012780882216"
+        iyz="1.70559493840729E-11"
+        izz="0.0030773621949221" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_abad_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_abad_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_abad_joint"
+    type="revolute">
+    <origin
+      xyz="0.241 0.055 0"
+      rpy="1.5707963267949 0 1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="lf_abad_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="lf_hip_link">
+    <inertial>
+      <origin
+        xyz="0.116650620494576 -4.72569313886284E-06 0.00350289526011932"
+        rpy="0 0 0" />
+      <mass
+        value="1.04888992329484" />
+      <inertia
+        ixx="0.000606304929356183"
+        ixy="-4.37311731436925E-07"
+        ixz="4.39293600211122E-05"
+        iyy="0.0123505145373424"
+        iyz="-1.2361253696655E-08"
+        izz="0.0125461321777431" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_hip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_hip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.10045 0 0.0554994371876099"
+      rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="lf_abad_link" />
+    <child
+      link="lf_hip_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="lf_knee_link">
+    <inertial>
+      <origin
+        xyz="0.0631956658016697 0.0112575879832314 -3.13498765280862E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.391062323768813" />
+      <inertia
+        ixx="0.000230753382412109"
+        ixy="0.000128309113413456"
+        ixz="-6.1436771836509E-09"
+        iyy="0.00365788306841941"
+        iyz="1.81135021036375E-09"
+        izz="0.00383395531746306" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_knee_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.658823529411765 0.619607843137255 0.56078431372549 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lf_knee_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.2695 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="lf_hip_link" />
+    <child
+      link="lf_knee_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link name="lf_foot_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0." ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+      <joint name="lf_foot_joint" type="fixed">
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.271 0 0"/>
+    <parent link="lf_knee_link"/>
+    <child link="lf_foot_link"/>
+  </joint>
+  <link
+    name="rr_abad_link">
+    <inertial>
+      <origin
+        xyz="0.0258192165959408 -7.26236163159085E-08 0.0524275468313256"
+        rpy="0 0 0" />
+      <mass
+        value="1.97468818481228" />
+      <inertia
+        ixx="0.00224471294806031"
+        ixy="9.22913376731601E-09"
+        ixz="-0.000156350222521567"
+        iyy="0.0032012780882216"
+        iyz="1.70689439583096E-11"
+        izz="0.0030773621949221" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_abad_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_abad_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rr_abad_joint"
+    type="revolute">
+    <origin
+      xyz="-0.241 -0.055 0"
+      rpy="1.57079632669003 0 -1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="rr_abad_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="rr_hip_link">
+    <inertial>
+      <origin
+        xyz="0.116650617270061 -4.72680310498186E-06 0.00350289524078168"
+        rpy="0 0 0" />
+      <mass
+        value="1.04888992713168" />
+      <inertia
+        ixx="0.000606304950867143"
+        ixy="-4.37435372440814E-07"
+        ixz="4.39293428916563E-05"
+        iyy="0.0123505150681065"
+        iyz="-1.23652493663601E-08"
+        izz="0.0125461327293142" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_hip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_hip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rr_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.10045 0 0.0554994371876102"
+      rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="rr_abad_link" />
+    <child
+      link="rr_hip_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="rr_knee_link">
+    <inertial>
+      <origin
+        xyz="0.0631956658016613 -0.0112575879832317 3.13498722814831E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.391062323768767" />
+      <inertia
+        ixx="0.000230753382412103"
+        ixy="-0.000128309113413423"
+        ixz="6.14367730807728E-09"
+        iyy="0.00365788306841906"
+        iyz="1.81135019024049E-09"
+        izz="0.00383395531746277" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_knee_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.658823529411765 0.619607843137255 0.56078431372549 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/rr_knee_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rr_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.2695 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="rr_hip_link" />
+    <child
+      link="rr_knee_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+    <link name="rr_foot_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0." ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+      <joint name="rr_foot_joint" type="fixed">
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.271 0 0"/>
+    <parent link="rr_knee_link"/>
+    <child link="rr_foot_link"/>
+  </joint>
+  <link
+    name="lr_abad_link">
+    <inertial>
+      <origin
+        xyz="0.025819 -7.2618E-08 0.052428"
+        rpy="0 0 0" />
+      <mass
+        value="1.9747" />
+      <inertia
+        ixx="0.0022447"
+        ixy="9.2291E-09"
+        ixz="-0.00015635"
+        iyy="0.0032013"
+        iyz="1.7056E-11"
+        izz="0.0030774" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_abad_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_abad_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lr_abad_joint"
+    type="revolute">
+    <origin
+      xyz="-0.241 0.055 0"
+      rpy="-1.5708 0 1.5708" />
+    <parent
+      link="body_link" />
+    <child
+      link="lr_abad_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="lr_hip_link">
+    <inertial>
+      <origin
+        xyz="0.116650620494577 -4.72569313902937E-06 0.00350289526011938"
+        rpy="0 0 0" />
+      <mass
+        value="1.04888992329485" />
+      <inertia
+        ixx="0.000606304929356184"
+        ixy="-4.37311731435936E-07"
+        ixz="4.39293600211125E-05"
+        iyy="0.0123505145373424"
+        iyz="-1.23612536964897E-08"
+        izz="0.0125461321777432" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_hip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_hip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lr_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.10045 0 0.0554994371876102"
+      rpy="1.5707963267949 0 1.5707963267949" />
+    <parent
+      link="lr_abad_link" />
+    <child
+      link="lr_hip_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+  <link
+    name="lr_knee_link">
+    <inertial>
+      <origin
+        xyz="0.063196 0.011258 -3.135E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.39106" />
+      <inertia
+        ixx="0.00023075"
+        ixy="0.00012831"
+        ixz="-6.1437E-09"
+        iyy="0.0036579"
+        iyz="1.8114E-09"
+        izz="0.003834" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_knee_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.65882 0.61961 0.56078 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://siriusmid_belt_description/meshes/lr_knee_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lr_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.2695 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="lr_hip_link" />
+    <child
+      link="lr_knee_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.88"
+      upper="2.88"
+      effort="25"
+      velocity="15" />
+    <safety_controller
+      soft_upper_limit="2.78"
+      soft_lower_limit="-2.78"
+      k_position="500"
+      k_velocity="5" />
+  </joint>
+    <link name="lr_foot_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <sphere radius="0.02175"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0." ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+      <joint name="lr_foot_joint" type="fixed">
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.271 0 0"/>
+    <parent link="lr_knee_link"/>
+    <child link="lr_foot_link"/>
+  </joint>
+</robot>

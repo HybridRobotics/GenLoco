@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<!-- Things that are needed only for Gazebo (not the physical robot). These include sensor and controller plugin specifications -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/body/body.gazebo.xacro"/>
+
+
+	<!-- ================================ Body ================================ -->
+	<!-- The xacro macro xacro:sirius_base contains: base and body -->
+        <xacro:macro name="sirius_body" params="new_gazebo_version">
+                <!-- BASE LINK -->
+                <!-- floating type is supported in older versions of Gazebo. In new Gazebo if a link has no parent, it is supposed to be attached to a floating joint -->
+
+                <xacro:unless value="$(arg new_gazebo_version)">
+                    <!-- Floating-base Joint -->
+                    <link name="world"/>
+
+                    <joint name="floating_base_joint" type="floating" >
+                        <origin rpy="0 0 0" xyz="0 0 0"/>
+                        <parent link="world"/>
+                        <child link="base_link"/>
+                    </joint>
+                </xacro:unless>
+
+
+
+                <joint name="floating_base" type="fixed">
+                    <origin rpy="0 0 0" xyz="0 0 0"/>
+                    <parent link="base_link"/>
+                    <child link="body_link"/>
+                </joint>
+
+        <link name="base_link"/>
+		<!-- body link -->
+        <link name="body_link">
+            <inertial>
+                <origin
+                    xyz="4.0393E-05 -2.1734E-06 -0.00063565"
+                    rpy="0 0 0" />
+                <mass
+                    value="5.283" />
+                <inertia
+                    ixx="0.028454"
+                    ixy="-5.9775E-08"
+                    ixz="-0.00050774"
+                    iyy="0.15791"
+                    iyz="-1.7886E-08"
+                    izz="0.17219" />
+            </inertial>
+            <visual>
+                <origin xyz=" 0 0 0" rpy="1.5704 0 0" />
+                <geometry>
+                    <mesh
+                    filename="package://siriusmid_description/meshes/body_link.STL" />
+                </geometry>
+                <material name="Pink" />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh
+                    filename="package://siriusmid_description/meshes/body_link.STL" />
+                </geometry>
+            </collision>
+        </link>
+
+		<!-- Extensions -->
+		<xacro:body_gazebo name="body_link"/>
+	</xacro:macro>
+
+</robot>

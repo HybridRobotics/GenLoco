@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<robot name="spot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find spot_description)/urdf/constants.urdf.xacro" />
+
+    <link name="body">
+        <visual>
+            <geometry>
+                <mesh filename="package://spot_description/meshes/body.dae" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://spot_description/meshes/body_collision.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="${base_mass}"/>
+            <inertia ixx="${(1/12) * base_mass * (base_width * base_width + base_height * base_height)}" ixy="0.0" ixz="0.0"
+                        iyy="${(1/12) * base_mass * (base_length * base_length + base_height * base_height)}" iyz="0.0"
+                        izz="${(1/12) * base_mass * (base_length * base_length + base_width * base_width)}" />     
+        </inertial>
+    </link>
+
+    <!-- <link name="base_link"/>
+    <joint name="base_link_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="body" />
+        <child link="base_link" />
+    </joint>
+
+    <link name="front_rail"/>
+    <joint name="front_rail_joint" type="fixed">
+        <origin xyz="0.223 0 0.0805" rpy="0 0 0" />
+        <parent link="body" />
+        <child link="front_rail" />
+    </joint>
+
+    <link name="rear_rail"/>
+    <joint name="rear_rail_joint" type="fixed">
+        <origin xyz="-0.223 0 0.0805" rpy="0 0 0" />
+        <parent link="body" />
+        <child link="rear_rail" />
+    </joint> -->
+
+    <!-- Optional custom includes. -->
+    <xacro:include filename="$(optenv SPOT_URDF_EXTRAS empty.urdf)" />
+    <!-- <xacro:include filename="$(find spot_description)/urdf/accessories.urdf.xacro" /> -->
+    <xacro:include filename="$(find spot_description)/urdf/spot_leg.urdf.xacro" />
+    <xacro:spot_leg leg_name="front_left"/>
+    <xacro:spot_leg leg_name="front_right"/>
+    <xacro:spot_leg leg_name="rear_left"/>
+    <xacro:spot_leg leg_name="rear_right"/>
+
+   <gazebo>
+      <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>odom/ground_truth</topicName>
+            <gaussianNoise>0.01</gaussianNoise>
+            <frameName>world</frameName>
+            <xyzOffsets>0 0 0</xyzOffsets>
+            <rpyOffsets>0 0 0</rpyOffsets>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <legacyModeNS>true</legacyModeNS>
+        </plugin>
+    </gazebo>
+</robot>

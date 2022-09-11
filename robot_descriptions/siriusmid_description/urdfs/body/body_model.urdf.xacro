@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+	<!-- Things that are needed only for Gazebo (not the physical robot). These include sensor and controller plugin specifications -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/body/body.gazebo.xacro"/>
+
+
+	<!-- ================================ body ================================ -->
+	<!-- The xacro macro xacro:sirius_base contains: base -->
+	<xacro:macro name="sirius_body" params="name">
+		<!-- Floating-base Joint -->
+		<joint name="floating_base" type="floating">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="${name}_link"/>
+			<child link="body"/>
+		</joint>
+
+		<!-- Links -->
+		<!-- Footprint link -->
+		<link name="${name}_link">
+			<visual>
+				<geometry>
+					<cylinder length="0.01" radius="0.01"/>
+				</geometry>
+			</visual>
+		</link>
+		<!-- body link -->
+		<link name="body">
+			<inertial>
+				<origin xyz="${xcom_body} ${ycom_body} ${zcom_body}"/>
+				<mass value="${m_body}"/>
+				<inertia ixx="${ixx_body}" iyy="${iyy_body}" izz="${izz_body}"
+						 ixy="${ixy_body}" ixz="${ixz_body}" iyz="${iyz_body}"/>
+			</inertial>
+			<visual>
+				<geometry>
+					<mesh filename="package://siriusmid_description/meshes/body.STL" scale="1 1 1"/>
+				</geometry>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://siriusmid_description/meshes/body.STL" scale="1 1 1"/>
+				</geometry>
+			</collision>
+		</link>
+
+		<!-- Extensions -->
+		<xacro:body_gazebo name="body"/>
+	</xacro:macro>
+
+</robot>

@@ -1,0 +1,6 @@
+.vscode
+.idea
+*build
+codogs_plan/lib/liblocalPlanner.so
+*.pyc
+*.bag*

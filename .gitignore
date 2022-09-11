@@ -1,0 +1,14 @@
+.DS_Store
+*/.DS_Store
+.idea
+*/.idea
+__pycache__
+__pycache__/
+*/__pycache__
+output
+.vscode
+log/
+output/
+logs/
+tf_model/
+*.pyc

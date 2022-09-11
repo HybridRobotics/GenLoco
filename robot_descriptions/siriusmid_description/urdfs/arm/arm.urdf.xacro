@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<!-- Things that are needed only for Gazebo (not the physical robot). These include sensor and controller plugin specifications -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/arm/arm.transmission.xacro"/>
+	<xacro:include filename="$(find siriusmid_description)/urdfs/arm/arm.gazebo.xacro"/>
+	<!-- ================================== Arm ================================== -->
+    <xacro:macro name="sirius_arm" params="num_name parent inertial_xyz inertial_rpy joint_xyz joint_rpy mass joint_axis ixx iyy izz ixy ixz iyz effort color_name low_lit up_lit load_force_sensors">
+    <link name="sirius_arm_link_${num_name}">
+      <inertial>
+        <origin xyz="${inertial_xyz}" rpy="${inertial_rpy}" />
+        <mass value="${mass}" />
+        <inertia
+          ixx="${ixx}"
+          ixy="${ixy}"
+          ixz="${ixz}"
+          iyy="${iyy}"
+          iyz="${iyz}"
+          izz="${izz}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://siriusmid_description/meshes/arm/link_${num_name}.STL" />
+        </geometry>
+        <material
+          name="${color_name}">
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://siriusmid_description/meshes/arm/link_${num_name}.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="sirius_arm_joint_${num_name}" type="revolute">
+      <origin xyz="${joint_xyz}" rpy="${joint_rpy}" />
+      <parent link="${parent}" />
+      <child link="sirius_arm_link_${num_name}" />
+      <axis xyz="${joint_axis}" />
+      <limit
+        lower="${low_lit}"
+        upper="${up_lit}"
+        effort="${effort}"
+        velocity="15" />
+    </joint>
+
+
+    <!-- Extensions -->
+    <xacro:siriusarm_transmission num_name="${num_name}"/>
+    <xacro:siriusarm_gazebo num_name="${num_name}" load_force_sensors="${load_force_sensors}"/>
+	</xacro:macro>
+
+</robot>

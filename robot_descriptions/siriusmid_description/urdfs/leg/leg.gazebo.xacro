@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro name="leg_gazebo" params="name load_force_sensors">
+
+		<gazebo reference="${name}_abad_joint">
+			<provideFeedback>true</provideFeedback>
+		</gazebo>
+		<xacro:if value="${load_force_sensors}">
+			<gazebo>
+				<plugin name="${name}_abad_sensor" filename="libgazebo_ros_ft_sensor.so">
+					<robotNamespace>/siriusbody/internal_wrench/</robotNamespace>
+					<updateRate>100.0</updateRate>
+					<topicName>${name}_abad_joint</topicName>
+					<jointName>${name}_abad_joint</jointName>
+				</plugin>
+			</gazebo>
+		</xacro:if>
+
+		<gazebo reference="${name}_hip_joint">
+			<provideFeedback>true</provideFeedback>
+		</gazebo>
+		<xacro:if value="${load_force_sensors}">
+			<gazebo>
+				<plugin name="${name}_hip_sensor" filename="libgazebo_ros_ft_sensor.so">
+					<robotNamespace>/siriusmid/internal_wrench/</robotNamespace>
+					<updateRate>100.0</updateRate>
+					<topicName>${name}_hip_joint</topicName>
+					<jointName>${name}_hip_joint</jointName>
+				</plugin>
+			</gazebo>
+		</xacro:if>
+
+		<gazebo reference="${name}_knee_joint">
+			<provideFeedback>true</provideFeedback>
+		</gazebo>
+		<xacro:if value="${load_force_sensors}">
+			<gazebo>
+				<plugin name="${name}_knee_sensor" filename="libgazebo_ros_ft_sensor.so">
+					<robotNamespace>/siriusmid/internal_wrench/</robotNamespace>
+					<updateRate>100.0</updateRate>
+					<topicName>${name}_knee_joint</topicName>
+					<jointName>${name}_knee_joint</jointName>
+				</plugin>
+			</gazebo>
+		</xacro:if>
+
+		<gazebo reference="${name}_hip_link">
+			<kp>1000000.0</kp>
+			<kd>100.0</kd>
+			<mu1>1.5</mu1>
+			<mu2>1.5</mu2>
+			<fdir1>1 0 0</fdir1>
+			<maxVel>3.0</maxVel>
+			<minDepth>0.00</minDepth>
+		</gazebo>
+		<gazebo reference="${name}_knee_link">
+			<kp>1000000.0</kp>
+			<kd>100.0</kd>
+			<mu1>1.0</mu1>
+			<mu2>1.0</mu2>
+			<maxVel>3.0</maxVel>
+			<maxContacts>1</maxContacts>
+			<sensor name="${name}_shin_contact_sensor" type="contact">
+                <always_on>true</always_on>
+                <update_rate>250.0</update_rate>
+                <contact>
+                  <collision>${name}_lowerleg_collision</collision>
+                </contact>
+                <!-- the sensor readings in terms of force torques are expressed in the lowerleg frame
+                because gazebo lumps the fake footframe with the real parent link, the normals are in the world frame-->
+                 <plugin name="${name}_shin_bumper" filename="libgazebo_ros_bumper.so">
+                  <bumperTopicName>/siriusmid/${name}_shin_bumper</bumperTopicName>
+                </plugin>
+            </sensor>   
+		</gazebo>
+
+		<gazebo reference="${name}_foot">
+                        <kp>1000000.0</kp>
+                        <kd>100.0</kd>
+                        <mu1>1.0</mu1>
+                        <mu2>1.0</mu2>
+                        <maxVel>3.0</maxVel>
+			<maxContacts>1</maxContacts>
+			<sensor name="${name}_foot_contact_sensor" type="contact">
+				<always_on>true</always_on>
+				<update_rate>250.0</update_rate>
+				<contact>
+					<collision>${name}_lowerleg_fixed_joint_lump__${name}_foot_collision_1</collision>
+				</contact>
+                                <!-- the sensor readings in terms of force torques are expressed in the lowerleg frame
+                                because gazebo lumps the fake footframe with the real parent link, the normals are in the world frame-->
+				<plugin name="${name}_foot_bumper" filename="libgazebo_ros_bumper.so">
+					<bumperTopicName>/siriusmid/${name}_foot_bumper</bumperTopicName>
+                                        <robotNamespace>siriusmid</robotNamespace>
+				</plugin>
+			</sensor>
+			<material>Gazebo/Black</material>
+		</gazebo>
+	</xacro:macro>
+
+</robot>

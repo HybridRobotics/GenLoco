@@ -1,0 +1,22 @@
+<launch>
+    <arg name="num_dogs" default="3"/>
+    <arg name="exec_time" default="1"/>
+    <arg name="wait_time" default="3"/>
+    
+    <node pkg="unitree_controller" type="unitree_servo" name="unitree_servo0" respawn="false" if="$(eval arg('num_dogs') >= 1)">
+        <param name="n" value="0"/>
+        <param name="exec_time" value="$(arg exec_time)"/>
+        <param name="wait_time" value="$(arg exec_time)"/>
+    </node>
+    <node pkg="unitree_controller" type="unitree_servo" name="unitree_servo1" respawn="false" if="$(eval arg('num_dogs') >= 2)">
+        <param name="n" value="1"/>
+        <param name="exec_time" value="$(arg exec_time)"/>
+        <param name="wait_time" value="$(arg exec_time)"/>
+    </node>
+    <node pkg="unitree_controller" type="unitree_servo" name="unitree_servo2" respawn="false" if="$(eval arg('num_dogs') >= 3)">
+        <param name="n" value="2"/>
+        <param name="exec_time" value="$(arg exec_time)"/>
+        <param name="wait_time" value="$(arg wait_time)"/>
+    </node>
+
+</launch>

@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <!-- Defining the colors used in this robot -->
+    <material name="Black">
+        <color rgba="0 0 0 1"/>
+    </material>
+    <material name="Yellow">
+        <color rgba="0.854 0.976 0.14 0.8"/>
+    </material>
+    <material name="White">
+        <color rgba="1 1 1 1"/>
+    </material>
+    <material name="Pink">
+        <color rgba="0.96 0.15 0.568 0.8"/>
+    </material>
+    <material name="Blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
+    <material name="Red">
+        <color rgba="1 0 0 1"/>
+    </material>
+    <material name="GreenSky">
+        <color rgba="0.149 0.976 0.941 0.8"/>
+    </material>
+
+	<!-- Things that are needed only for Gazebo (not the physical robot). These include sensor and controller plugin specifications -->
+	<xacro:include filename="$(find siriusmid_description)/urdfs/leg/leg.transmission.xacro"/>
+	<xacro:include filename="$(find siriusmid_description)/urdfs/leg/leg.gazebo.xacro"/>
+
+
+	<!-- ================================== Leg ================================== -->
+	<!-- The xacro macro xacro:siriusmid_leg contains: abad assembly, upper and lower leg -->
+	<xacro:macro name="siriusmid_leg" params="name parent abad_o_x abad_o_y abad_o_z abad_rpy_r abad_rpy_p abad_rpy_y hip_rpy_r hip_rpy_p hip_rpy_y load_force_sensors">
+		<!-- Joints -->
+		<!-- abad assembly joint -->
+        <joint name="${name}_abad_joint" type="revolute">
+            <parent link="${parent}"/>
+            <child link="${name}_abad_link"/>
+            <origin xyz="${abad_o_x} ${abad_o_y} ${abad_o_z}" rpy="${abad_rpy_r} ${abad_rpy_p} ${abad_rpy_y}" /> 
+            <axis xyz="0 0 -1"/>
+            <limit
+                lower="-2.88"
+                upper="2.88"
+                effort="25"
+                velocity="15" />
+            <!-- soft limits  keep the motor in safety mode-->
+            <safety_controller k_position="500" k_velocity="5" soft_lower_limit="-2.78" soft_upper_limit="2.78"/>
+        </joint>
+		<!-- Upper leg joint -->
+        <joint name="${name}_hip_joint" type="revolute">
+            <parent link="${name}_abad_link"/>
+            <child link="${name}_hip_link"/>
+            <origin xyz="0.09355 0 0.052" rpy="${hip_rpy_r} ${hip_rpy_p} ${hip_rpy_y}" />
+            <axis xyz="0 0 1"/>
+            <limit
+                lower="-2.88"
+                upper="2.88"
+                effort="25"
+                velocity="15" />
+            <!-- soft limits  keep the motor in safety mode-->
+            <safety_controller k_position="500" k_velocity="5" soft_lower_limit="-2.78" soft_upper_limit="2.78"/>
+        </joint>
+		<!-- Lower leg joint -->
+        <joint name="${name}_knee_joint" type="revolute">
+            <parent link="${name}_hip_link"/>
+            <child link="${name}_knee_link"/>
+            <origin xyz="0.269 0 0" rpy="0 0 0" />
+            <axis xyz="0 0 -1"/>
+            <limit
+                lower="-2.88"
+                upper="2.88"
+                effort="25"
+                velocity="15" />
+            <!-- soft limits  keep the motor in safety mode-->
+            <safety_controller k_position="500" k_velocity="5" soft_lower_limit="-2.78" soft_upper_limit="2.78"/>
+        </joint>
+		<!-- foot joint-->
+		<joint name="${name}_foot_joint" type="fixed">
+			<origin xyz="0.271 0 0" rpy="${PI/2} 0 ${-PI/2}"/>
+			<parent link="${name}_knee_link"/>
+			<child  link="${name}_foot"/>
+		</joint>
+
+
+		<!-- Links -->
+		<!-- abad link -->
+        <link name="${name}_abad_link">
+            <inertial>
+                <origin
+                    xyz="-0.0012806 4.3563E-08 0.049958"
+                    rpy="0 0 0" />
+                <mass
+                    value="0.92607" />
+                <inertia
+                    ixx="0.00098647"
+                    ixy="-7.0392E-11"
+                    ixz="6.4987E-06"
+                    iyy="0.00071554"
+                    iyz="1.2357E-10"
+                    izz="0.00065157" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0  0 " /> 
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_abad_link.STL" />
+                </geometry>
+                <material name="Black" />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0 " />
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_abad_link.STL" />
+                </geometry>
+            </collision>
+		</link>
+		<!-- name: lf,lr,rf,rr -->
+        <link name="${name}_hip_link">
+            <inertial>
+                <origin
+                    xyz="0.027042 -1.7816E-10 0.028552"
+                    rpy="0 0 0" />
+                <mass
+                    value="1.22" />
+                <inertia
+                    ixx="0.001198"
+                    ixy="4.6672E-11"
+                    ixz="0.00095291"
+                    iyy="0.0068604"
+                    iyz="2.0712E-12"
+                    izz="0.0068553" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0  0 " /> 
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_hip_link.STL" />
+                </geometry>
+                <material name="GreenSky" />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0 " />
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_hip_link.STL" />
+                </geometry>
+            </collision>
+
+        </link>
+		<!-- Lower leg link -->
+    	<!-- name: lf,lr,rf,rr -->
+        <link name="${name}_knee_link">
+            <inertial>
+                <origin
+                    xyz="0.11612 -0.0066095 -4.5982E-08"
+                    rpy="0 0 0" />
+                <mass
+                    value="0.19509" />
+                <inertia
+                    ixx="0.00010142"
+                    ixy="-0.00027114"
+                    ixz="2.9242E-09"
+                    iyy="0.0024964"
+                    iyz="2.6632E-09"
+                    izz="0.0025805"/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0  0 " /> 
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_knee_link.STL" />
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0 " />
+                <geometry>
+                    <mesh
+                        filename="package://siriusmid_description/meshes/${name}_knee_link.STL" />
+                </geometry>
+            </collision>
+
+        </link>
+				<!-- Links -->
+		<!-- Foot link -->
+		<link name="${name}_foot">
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<sphere radius="0.02175"/>
+				</geometry>
+			</collision>
+			<visual>
+				<geometry>
+					<sphere radius="0.02175" />
+				</geometry>
+				<material name="Red" />
+			</visual>
+		</link>
+		
+		<!-- Extensions -->
+		<xacro:leg_transmission name="${name}"/>
+		<xacro:leg_gazebo name="${name}" load_force_sensors="${load_force_sensors}"/>
+	</xacro:macro>
+
+</robot>

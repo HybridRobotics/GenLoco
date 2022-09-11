@@ -1,0 +1,15 @@
+<launch>
+    <arg name="config_file" default="a1_local.yaml"/>
+    <rosparam file="$(find reinforce_controller)/yaml/$(arg config_file)" command="load"/>
+    <node pkg="reinforce_controller" type="gazebo_main" name="gazebo_main" respawn="false" output="screen">
+    </node>
+
+    <node pkg="reinforce_controller" type="UDP_Receiver" name="UDP_Receiver" respawn="false" output="screen">
+    </node>
+    <node pkg="reinforce_controller" type="UDP_Sender" name="UDP_Sender" respawn="false" output="screen">
+    </node>
+    <node pkg="reinforce_controller" type="keyboard_node" name="keyboard_node" respawn="false" output="screen">
+    </node>
+    <node pkg="reinforce_controller" type="stand_node" name="stand_node" respawn="false" output="screen">
+    </node>
+</launch>

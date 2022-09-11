@@ -1,0 +1,15 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mini_cheetah_description)/urdf/mini_cheetah.urdf' " />
+    <node name="mini_cheetah_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <param name="publish_frequency" type="double" value="30.0" />
+        <param name="ignore_timestamp" type="bool" value="true" />
+    </node>
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mini_cheetah_description)/rviz/urdf_viewer.rviz" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+        <rosparam param="/source_list">[mini_cheetah/joint_states]</rosparam>
+    </node>
+</launch>
+
